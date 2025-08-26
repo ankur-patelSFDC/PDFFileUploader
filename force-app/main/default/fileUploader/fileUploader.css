@@ -1,0 +1,246 @@
+.file-uploader-container {
+    font-family: 'Salesforce Sans', Arial, sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.upload-area {
+    border: 2px dashed #dddbda;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    background-color: #fafaf9;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.upload-area:hover {
+    border-color: #0176d3;
+    background-color: #f3f2f2;
+}
+
+.upload-area.drag-over {
+    border-color: #0176d3;
+    background-color: #eef4ff;
+    transform: scale(1.02);
+}
+
+.upload-content {
+    pointer-events: none;
+}
+
+.upload-icon {
+    --sds-c-icon-color-foreground-default: #0176d3;
+    margin-bottom: 1rem;
+}
+
+.upload-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #181818;
+    margin: 0 0 0.5rem 0;
+}
+
+.upload-description {
+    color: #706e6b;
+    margin: 0 0 1rem 0;
+    font-size: 0.875rem;
+}
+
+.file-requirements {
+    background-color: #f3f2f2;
+    border-radius: 4px;
+    padding: 0.75rem;
+    margin-top: 1rem;
+}
+
+.file-requirements p {
+    margin: 0.25rem 0;
+    font-size: 0.75rem;
+    color: #706e6b;
+}
+
+.file-input {
+    display: none;
+}
+
+.file-preview {
+    background-color: #ffffff;
+    border: 1px solid #dddbda;
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.file-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.file-type-icon {
+    --sds-c-icon-color-foreground-default: #0176d3;
+    flex-shrink: 0;
+}
+
+.file-details {
+    flex: 1;
+}
+
+.file-name {
+    margin: 0 0 0.25rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #181818;
+    word-break: break-word;
+}
+
+.file-size {
+    margin: 0 0 0.25rem 0;
+    font-size: 0.875rem;
+    color: #706e6b;
+}
+
+.file-status {
+    margin: 0;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.status-valid {
+    color: #04844a;
+}
+
+.status-invalid {
+    color: #ea001e;
+}
+
+.remove-file-btn {
+    --sds-c-button-icon-color-foreground-default: #706e6b;
+    flex-shrink: 0;
+}
+
+.remove-file-btn:hover {
+    --sds-c-button-icon-color-foreground-default: #ea001e;
+}
+
+.validation-details {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    border-radius: 4px;
+    background-color: #f3f2f2;
+    border-left: 4px solid #04844a;
+}
+
+.validation-details.validation-error {
+    background-color: #fef7f0;
+    border-left-color: #ea001e;
+}
+
+.validation-details p {
+    margin: 0;
+    font-size: 0.875rem;
+    color: #181818;
+}
+
+.error-message {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #fef7f0;
+    border: 1px solid #ea001e;
+    border-radius: 4px;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    color: #ea001e;
+}
+
+.error-icon {
+    --sds-c-icon-color-foreground-default: #ea001e;
+    flex-shrink: 0;
+}
+
+.success-message {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #f0f8f0;
+    border: 1px solid #04844a;
+    border-radius: 4px;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    color: #04844a;
+}
+
+.success-icon {
+    --sds-c-icon-color-foreground-default: #04844a;
+    flex-shrink: 0;
+}
+
+.upload-actions {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.upload-btn {
+    min-width: 120px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .upload-area {
+        padding: 1.5rem;
+    }
+    
+    .upload-title {
+        font-size: 1.125rem;
+    }
+    
+    .file-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+    
+    .remove-file-btn {
+        align-self: flex-end;
+    }
+}
+
+/* Animation for drag and drop */
+.upload-area.drag-over .upload-content {
+    animation: pulse 0.6s ease-in-out;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Loading state for file processing */
+.file-preview.processing {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.file-preview.processing::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #0176d3;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

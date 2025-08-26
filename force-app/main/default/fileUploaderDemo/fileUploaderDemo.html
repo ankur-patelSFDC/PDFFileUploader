@@ -1,0 +1,90 @@
+<template>
+    <lightning-card title="Enhanced PDF File Uploader Demo" icon-name="utility:upload">
+        <div class="demo-container">
+            <div class="demo-section">
+                <h2>Component Features</h2>
+                <ul>
+                    <li>✅ Drag and drop file upload</li>
+                    <li>✅ File extension validation (.pdf only)</li>
+                    <li>✅ PDF content validation using magic numbers</li>
+                    <li>✅ File size validation (configurable)</li>
+                    <li>✅ Real-time validation feedback</li>
+                    <li>✅ Prevents renamed non-PDF files</li>
+                    <li>✅ Responsive design</li>
+                </ul>
+            </div>
+            
+            <div class="demo-section">
+                <h2>Try It Out</h2>
+                <p class="demo-description">
+                    Test the component by uploading a real PDF file or trying to upload a renamed non-PDF file.
+                    The component will validate both the file extension and the actual file content.
+                </p>
+                
+                <c-file-uploader
+                    max-file-size={maxFileSize}
+                    accepted-file-types={acceptedFileTypes}
+                    show-file-preview={showFilePreview}
+                    onfileupload={handleFileUpload}>
+                </c-file-uploader>
+            </div>
+            
+            <div class="demo-section" if:true={uploadedFiles.length}>
+                <h2>Upload History</h2>
+                <div class="upload-history">
+                    <template for:each={uploadedFiles} for:item="fileInfo">
+                        <div key={fileInfo.id} class="history-item">
+                            <lightning-icon 
+                                icon-name="doctype:pdf" 
+                                size="small" 
+                                class="history-icon">
+                            </lightning-icon>
+                            <div class="history-details">
+                                <p class="history-name">{fileInfo.fileName}</p>
+                                <p class="history-size">{fileInfo.fileSize}</p>
+                                <p class="history-time">{fileInfo.uploadTime}</p>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+            
+            <div class="demo-section">
+                <h2>How It Works</h2>
+                <div class="how-it-works">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>File Selection</h4>
+                            <p>User selects a file via click or drag & drop</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Extension Check</h4>
+                            <p>Component validates the file extension is .pdf</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Content Validation</h4>
+                            <p>Component reads file header and checks for PDF magic numbers (%PDF)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Upload</h4>
+                            <p>Only files passing both validations can be uploaded</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+</template>

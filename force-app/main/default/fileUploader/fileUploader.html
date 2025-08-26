@@ -1,0 +1,109 @@
+<template>
+    <div class="file-uploader-container">
+        <!-- File Upload Area -->
+        <div class={uploadAreaClass} 
+             ondrop={handleDrop}
+             ondragover={handleDragOver}
+             ondragleave={handleDragLeave}
+             onclick={triggerFileInput}>
+            
+            <div class="upload-content">
+                <lightning-icon 
+                    icon-name="utility:upload" 
+                    size="large" 
+                    class="upload-icon">
+                </lightning-icon>
+                
+                <h3 class="upload-title">Upload PDF File</h3>
+                <p class="upload-description">
+                    Drag and drop your PDF file here, or click to browse
+                </p>
+                
+                <div class="file-requirements">
+                    <p>• Maximum file size: 10MB</p>
+                    <p>• Only PDF files are allowed</p>
+                    <p>• File content will be validated</p>
+                </div>
+            </div>
+            
+            <input 
+                type="file" 
+                accept=".pdf"
+                class="file-input" 
+                onchange={handleFileSelect}
+                ref={fileInput}>
+        </div>
+
+        <!-- File Preview and Validation -->
+        <template if:true={selectedFile}>
+            <div class="file-preview">
+                <div class="file-info">
+                    <lightning-icon 
+                        icon-name={fileIconName} 
+                        size="small" 
+                        class="file-type-icon">
+                    </lightning-icon>
+                    
+                    <div class="file-details">
+                        <h4 class="file-name">{selectedFile.name}</h4>
+                        <p class="file-size">{formattedFileSize}</p>
+                        <p class="file-status" class:status-valid={isValidPdf} class:status-invalid={isValidPdfInvalid}>
+                            {validationStatus}
+                        </p>
+                    </div>
+                    
+                    <lightning-button-icon 
+                        icon-name="utility:close" 
+                        variant="bare" 
+                        onclick={removeFile}
+                        class="remove-file-btn">
+                    </lightning-button-icon>
+                </div>
+                
+                <!-- Validation Details -->
+                <template if:true={validationDetails}>
+                    <div class="validation-details" class:validation-error={isValidPdfInvalid}>
+                        <p>{validationDetails}</p>
+                    </div>
+                </template>
+            </div>
+        </template>
+
+        <!-- Error Messages -->
+        <template if:true={errorMessage}>
+            <div class="error-message">
+                <lightning-icon 
+                    icon-name="utility:error" 
+                    size="small" 
+                    class="error-icon">
+                </lightning-icon>
+                <span>{errorMessage}</span>
+            </div>
+        </template>
+
+        <!-- Success Message -->
+        <template if:true={successMessage}>
+            <div class="success-message">
+                <lightning-icon 
+                    icon-name="utility:success" 
+                    size="small" 
+                    class="success-icon">
+                </lightning-icon>
+                <span>{successMessage}</span>
+            </div>
+        </template>
+
+        <!-- Upload Button -->
+        <template if:true={selectedFile}>
+            <div class="upload-actions">
+                <lightning-button 
+                    label="Upload File" 
+                    variant="brand" 
+                    onclick={uploadFile}
+                    disabled={isValidPdfInvalid}
+                    class="upload-btn">
+                </lightning-button>
+            </div>
+        </template>
+    </div>
+</template>
